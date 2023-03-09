@@ -6,10 +6,10 @@ export default class BaspanAPI {
     jsessionid: string;
 
     constructor(
-        url: string | URL = new URL(window.location.href),
+        url: string | URL = new URL(window.top!.location.href),
         path: string = '/mge',
-        params: string | URLSearchParams = "",
-        jsessionid: string = (document.cookie.split(";").reduce((ac, cv, i) => Object.assign(ac, { [cv.split('=')[0]]: cv.split('=')[1] }), {}) as any)["JSESSIONID"]
+        params: string | URLSearchParams = "?",
+        jsessionid: string = window.top!.document.cookie.split(";").reduce((ac, cv, i) => Object.assign(ac, { [cv.split('=')[0]]: cv.split('=')[1] }), {}) as any ["JSESSIONID"]
     ) {
         if (typeof url === 'string') {
             url = new URL(url)
@@ -37,22 +37,23 @@ export default class BaspanAPI {
         this.xhttp.open("POST", this.urlbase, true);
         this.xhttp.setRequestHeader("Accept", "*/*");
         this.xhttp.setRequestHeader("JSESSIONID", this.jsessionid);
+        this.xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+        this.xhttp.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         this.xhttp.send(JSON.stringify(payload));
 
 
         return new Promise((resolve, reject) => {
-
             this.xhttp.onload = () => {
 
                 let status = this.xhttp.status;
                 let readyState = this.xhttp.readyState
 
 
-                if (readyState == 4 && status == 200) {
+                if (readyState === 4 && status === 200) {
                     resolve(this.xhttp.response);
                 }
                 else {
-                    reject([status, readyState]);
+                    reject([status]);
                 }
             }
         });
