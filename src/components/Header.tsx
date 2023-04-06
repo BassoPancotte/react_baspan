@@ -14,7 +14,7 @@ export default function Header(props: { title: string }) {
                     maxWidth={'30%'}
                     textAlign={'left'}
                 >
-                    <img src="https://bassopancotte.websiteseguro.com/images/logo_basso.png" alt="logo" height={'90vw'} />
+                    <img src="https://bassopancotte.websiteseguro.com/images/logo_basso.png" style={{ marginLeft: '1%' }} alt="logo" height={'90vw'} />
                 </Grid>
                 <Grid
                     width={'70%'}

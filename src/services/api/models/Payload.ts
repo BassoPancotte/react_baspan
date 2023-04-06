@@ -1,6 +1,4 @@
-import Service from "./Service";
-
 export default interface Payload {
-    serviceName: Service["serviceName"];
+    serviceName: String;
     requestBody: Object
 }

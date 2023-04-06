@@ -1,7 +1,6 @@
 import axios from "axios";
-import Payload from "./models/Payload";
-import ResponseModel from "./models/ResponseModel";
-import ServiceModel from './models/Service'
+import Payload from "../models/Payload";
+import ResponseModel from "../models/ResponseModel";
 
 export default class Bapi {
     static origin: string;
@@ -15,12 +14,11 @@ export default class Bapi {
 
     static post = async (
         path: string | URL["pathname"] = '/mge/service.sbr'
-        , searchParams: string | URL["searchParams"] = ''
-        , service: ServiceModel
-        , payload: Payload | Payload["requestBody"],
+        , othersParams: string = ''
+        , payload: Payload,
 
     ): Promise<ResponseModel> => {
-        const url = new URL(`${Bapi.origin}/${path}${searchParams === '' ? '?' : `${searchParams}&`}serviceName=${service.serviceName}&outputType=${service.outputType}`)
+        const url = new URL(`${Bapi.origin}/${path}${othersParams}`)
         const response = await axios.post(url.href, JSON.stringify(payload));
 
         return JSON.parse(response.data) as ResponseModel
