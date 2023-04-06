@@ -14,7 +14,7 @@ module.exports = {
   entry: `./src/dashboards/${dashboard}/${dashboard}.tsx`,
   output: {
     path: `${__dirname}/build/${dashboard}/`,
-    publicPath: prod ? baseUrl : './'
+    publicPath: prod ? baseUrl : '/'
   },
   module: {
     rules: [
