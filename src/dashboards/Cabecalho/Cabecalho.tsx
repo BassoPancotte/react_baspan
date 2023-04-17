@@ -5,10 +5,17 @@ import Header from '../../components/Header';
 import './Cabecalho.css'
 
 export default function Cabecalho() {
-  const titleDash = parent.document.getElementsByClassName('DashWindow-TopBar-Title')[0] as HTMLDivElement
+  let titleDash: string;
+
+  try {
+    titleDash = parent.parent.document.getElementsByClassName("AppItem-selected")[0].textContent as string;
+  } catch (error) {
+    titleDash = 'Basso Pancotte';
+  }
+
 
   return (
-      <Header title={titleDash !== undefined ? titleDash!.title : 'Basso Pancotte'}></Header>
+    <Header title={titleDash}></Header>
   )
 }
 

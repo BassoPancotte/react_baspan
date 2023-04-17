@@ -1,7 +1,8 @@
 import Bapi from "../core/bapi"
-export default async (query: string) => {
+import ResponseModel from "../models/ResponseModel";
+export default async (query: string): Promise<ResponseModel["responseBody"]> => {
 
-    const serviceName = 'DbExplorerSP.executeQuery;'
+    const serviceName = 'DbExplorerSP.executeQuery'
     const payload = {
         "serviceName": serviceName,
         "requestBody": {
@@ -10,5 +11,5 @@ export default async (query: string) => {
     }
 
     const result = await Bapi.post(undefined, `?serviceName=${serviceName}&outputTypejson`, payload);
-
+    return result["responseBody"];
 }

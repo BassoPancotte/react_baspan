@@ -15,7 +15,7 @@ export default function Center(props: { children: JSX.Element }) {
                 direction="row"
                 minHeight={'100vh'}
             >
-                <Grid container>{props.children}</Grid>
+                {props.children}
             </Grid >
         </Grid >
     )

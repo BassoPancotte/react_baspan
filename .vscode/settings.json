@@ -1,0 +1,13 @@
+{
+    // "code-runner.executorMap": {
+    //     "typescript": "ts-node"
+    // },
+    "code-runner.executorMapByFileExtension": {
+        ".tsx": "npm run start:dev"
+    },
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.ignoreSelection": true,
+    "code-runner.runInTerminal": true,
+    "code-runner.saveAllFilesBeforeRun": true,
+    "code-runner.fileDirectoryAsCwd": true,
+}
