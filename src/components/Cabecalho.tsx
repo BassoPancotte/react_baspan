@@ -1,7 +1,5 @@
 import React from 'react'
-import { createRoot } from "react-dom/client";
-import Header from '../../components/Header';
-import './Cabecalho.css'
+import Header from '../components/Header';
 
 export default function Cabecalho() {
   let titleDash: string;
@@ -17,6 +15,3 @@ export default function Cabecalho() {
     <Header title={titleDash}></Header>
   )
 }
-
-const root = createRoot(document.getElementById('root-Cabecalho') as HTMLElement)
-root.render(Cabecalho())

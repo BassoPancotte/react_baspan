@@ -1,22 +1,25 @@
 import { Grid } from '@mui/material'
 import React from 'react'
 
-export default function Center(props: { children: JSX.Element }) {
+export default function Center(props: { children: JSX.Element | JSX.Element[] }) {
     return (
         <Grid
+            alignContent={'center'}
+            alignItems={'center'}
+            alignSelf={'center'}
+            textAlign={'center'}
             container
-            direction="column">
+            direction="row"
+            minHeight={'100vh'}
+        >
             <Grid
-                alignContent={'center'}
-                alignItems={'center'}
-                alignSelf={'center'}
-                textAlign={'center'}
                 container
-                direction="row"
-                minHeight={'100vh'}
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
             >
-                {props.children}
+                <Grid>{props.children}</Grid>
             </Grid >
-        </Grid >
+        </Grid>
     )
 }
