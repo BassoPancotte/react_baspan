@@ -1,6 +1,5 @@
 import { Grid } from '@mui/material';
 import React from 'react'
-import { createRoot } from "react-dom/client";
 import Card from './Card';
 import SnkHTML5 from './SnkHTML5';
 

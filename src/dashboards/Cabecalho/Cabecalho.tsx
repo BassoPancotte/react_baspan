@@ -1,20 +1,11 @@
 import React from 'react'
 import { createRoot } from "react-dom/client";
-import Header from '../../components/Header';
+import CabecalhoComponent from '../../components/Cabecalho';
 import './Cabecalho.css'
 
 export default function Cabecalho() {
-  let titleDash: string;
-
-  try {
-    titleDash = parent.parent.document.getElementsByClassName("AppItem-selected")[0].textContent as string;
-  } catch (error) {
-    titleDash = 'Basso Pancotte';
-  }
-
-
   return (
-    <Header title={titleDash}></Header>
+    <CabecalhoComponent></CabecalhoComponent>
   )
 }
 
