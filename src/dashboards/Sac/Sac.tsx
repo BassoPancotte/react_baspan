@@ -1,10 +1,11 @@
 import React from 'react'
 import { createRoot } from "react-dom/client";
 import './Sac.css'
+import ScheduleSac from '../../components/SheduleSac/ScheduleSac';
 
 export default function Sac() {
   return (
-    <div>Sac</div>
+    <ScheduleSac />
   )
 }
 

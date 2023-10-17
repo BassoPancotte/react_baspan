@@ -1,27 +1,61 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Payload from "../models/Payload";
 import ResponseModel from "../models/ResponseModel";
 
 export default class Bapi {
-    private static origin: string;
-    private static jsessionid: string;
+    private static origin: string = top!.document.location.origin;
 
-    constructor(origin: string | undefined, jsessionid: string | undefined) {
-        Bapi.origin = origin === undefined ? top!.document.location.origin : origin;
-        Bapi.jsessionid = jsessionid === undefined ? (top!.document.cookie.split(";").reduce((ac, cv, i) => Object.assign(ac, { [cv.split('=')[0]]: cv.split('=')[1] }), {})) as any["JSESSIONID"] : jsessionid;
+    static async post(
+        path: string | URL["pathname"] = 'mge/service.sbr',
+        queryParams: QueryParams,
+        payload: Payload
+    ): Promise<ResponseModel> {
+        const url = `${Bapi.origin}/${path}?${queryParams.getParams()}`
+
+        return new Promise((resolve, reject) => {
+            axios({
+                method: 'post',
+                url: url,
+                data: payload,
+            }).then(
+                (response) => {
+                    const responseModel: ResponseModel = response.data
+                    if (responseModel.status == "1") {
+                        resolve(response.data)
+                    } else {
+                        reject(response.data)
+                    }
+                }
+            )
+        });
     };
 
+}
 
-    static post = async (
-        path: string | URL["pathname"] = 'mge/service.sbr'
-        , othersParams: string = ''
-        , payload: Payload,
+export class QueryParams {
 
-    ): Promise<ResponseModel> => {
-        const url = `${Bapi.origin}/${path}${othersParams}`
-        const response = await axios.post(url, JSON.stringify(payload));
+    headers: Params[] = [];
 
-        return JSON.parse(response.data) as ResponseModel
+    public setParam(paramName: string, paramValue: string): void {
+        this.headers.push(new Params(paramName, paramValue));
     };
 
+    public getParams(): string {
+        return `&${this.headers.join('&')}`
+    }
+
+}
+
+class Params {
+    param: string = "";
+    value: string = "";
+
+    public constructor(param: string, value: string) {
+        this.param = param;
+        this.value = value;
+    }
+
+    public toString(): string { 
+        return `${this.param}=${this.value}`
+    }
 }

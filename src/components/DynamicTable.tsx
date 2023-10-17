@@ -92,7 +92,7 @@ export default function DynamicTable(props: {
                         page={page}
                         onPageChange={handleChangePage}
                         onRowsPerPageChange={handleChangeRowsPerPage}
-                        labelRowsPerPage={"Registros por página: "}
+                        labelRowsPerPage={"Registros por pagina: "}
                         lang='pt-br'
                         translate='yes'
                     />
